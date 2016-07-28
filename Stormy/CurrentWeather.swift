@@ -16,3 +16,5 @@ struct CurrentWeather {
     let summary: String
     let icon: UIImage
 }
+
+

@@ -7,7 +7,20 @@
 //
 
 import UIKit
-
+extension CurrentWeather {
+    var temperatureString: String {
+        return "\(Int(self.temperature)) º"
+    }
+    
+    var humidityString: String {
+        return "\(Int(self.humidity * 100.0))%"
+    }
+    
+    var precipProbabilityString: String {
+        return "\(Int(self.precipProbability * 100.0 ))%"
+    }
+    
+}
 class ViewController: UIViewController {
     
     @IBOutlet weak var currentTemperatureLabel: UILabel!
@@ -18,10 +31,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var refreshButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+       
+        let icon = WeatherIcon.PartlyCloudyDay.image
+        let currentWeather = CurrentWeather(temperature: 95.3, humidity: 0.54, precipProbability: 0.1, summary: "Sunny and humid!", icon: icon)
+        display(currentWeather)
+        
+       
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,6 +48,13 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func display(currentWeather: CurrentWeather) {
+        currentTemperatureLabel.text = currentWeather.temperatureString
+        currentHumidityLabel.text = currentWeather.humidityString
+        currentPrecipitationLabel.text = currentWeather.precipProbabilityString
+        currentSummaryLabel.text = currentWeather.summary
+        currentWeatherIcon.image = currentWeather.icon
+    }
 
 }
 
