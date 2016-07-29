@@ -14,6 +14,8 @@
 		97F14FF31CB9EEB20065EE08 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97F14FF11CB9EEB20065EE08 /* LaunchScreen.storyboard */; };
 		D95D35701D4AA70E0015FEBF /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95D356F1D4AA70E0015FEBF /* CurrentWeather.swift */; };
 		D95D35731D4AA9C90015FEBF /* WeatherIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95D35721D4AA9C90015FEBF /* WeatherIcon.swift */; };
+		D95D35751D4AC1D70015FEBF /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95D35741D4AC1D70015FEBF /* APIClient.swift */; };
+		D95D35771D4AD68A0015FEBF /* ForecastClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95D35761D4AD68A0015FEBF /* ForecastClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		97F14FF41CB9EEB20065EE08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D95D356F1D4AA70E0015FEBF /* CurrentWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
 		D95D35721D4AA9C90015FEBF /* WeatherIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherIcon.swift; sourceTree = "<group>"; };
+		D95D35741D4AC1D70015FEBF /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		D95D35761D4AD68A0015FEBF /* ForecastClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,8 @@
 			children = (
 				D95D35711D4AA9A20015FEBF /* Weather Model */,
 				97F14FE81CB9EEB20065EE08 /* AppDelegate.swift */,
+				D95D35741D4AC1D70015FEBF /* APIClient.swift */,
+				D95D35761D4AD68A0015FEBF /* ForecastClient.swift */,
 				97F14FEA1CB9EEB20065EE08 /* ViewController.swift */,
 				97F14FEC1CB9EEB20065EE08 /* Main.storyboard */,
 				97F14FEF1CB9EEB20065EE08 /* Assets.xcassets */,
@@ -152,6 +158,8 @@
 				97F14FEB1CB9EEB20065EE08 /* ViewController.swift in Sources */,
 				D95D35731D4AA9C90015FEBF /* WeatherIcon.swift in Sources */,
 				D95D35701D4AA70E0015FEBF /* CurrentWeather.swift in Sources */,
+				D95D35771D4AD68A0015FEBF /* ForecastClient.swift in Sources */,
+				D95D35751D4AC1D70015FEBF /* APIClient.swift in Sources */,
 				97F14FE91CB9EEB20065EE08 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

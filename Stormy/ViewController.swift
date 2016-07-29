@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 extension CurrentWeather {
     var temperatureString: String {
         return "\(Int(self.temperature)) º"
@@ -21,6 +22,7 @@ extension CurrentWeather {
     }
     
 }
+
 class ViewController: UIViewController {
     
     @IBOutlet weak var currentTemperatureLabel: UILabel!
@@ -31,14 +33,32 @@ class ViewController: UIViewController {
     @IBOutlet weak var refreshButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    
+    private let forecastAPIKey = DataRequest.keyForAPI
+//    private let locationString = DataRequest.locationString
 
+    lazy var forecastAPIClient = {
+        return ForecastAPIClient(APIKey: DataRequest.keyForAPI)
+    }()
+    let coordinate = DataRequest.location
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        let icon = WeatherIcon.PartlyCloudyDay.image
-        let currentWeather = CurrentWeather(temperature: 95.3, humidity: 0.54, precipProbability: 0.1, summary: "Sunny and humid!", icon: icon)
-        display(currentWeather)
+        forecastAPIClient.fetchCurrentWeather(coordinate){ result in
+            switch result {
+            case .Success(let currentWeather):
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.display(currentWeather)
+                }
+            case .Failure(let error as NSError):
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.showAlert("Unable to retrieve weather data", message: error.localizedDescription)
+                }
+            default: break 
+            }
+        }
+        
+        
         
        
     }
@@ -56,5 +76,12 @@ class ViewController: UIViewController {
         currentWeatherIcon.image = currentWeather.icon
     }
 
+    func showAlert(title: String, message: String?, style: UIAlertControllerStyle = .Alert){
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
+        let dismissAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alertController.addAction(dismissAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
 }
 
