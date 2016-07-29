@@ -43,17 +43,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        forecastAPIClient.fetchCurrentWeather(coordinate){ result in
-            switch result {
-            case .Success(let currentWeather):
-                    self.display(currentWeather)
-            case .Failure(let error as NSError):
-                    self.showAlert("Unable to retrieve weather data", message: error.localizedDescription)
-            default: break
-            }
-        }
-        
+
+        fetchCurrentWeather()
         
         
        
@@ -79,5 +70,20 @@ class ViewController: UIViewController {
         
         presentViewController(alertController, animated: true, completion: nil)
     }
+    
+    func fetchCurrentWeather() {
+        forecastAPIClient.fetchCurrentWeather(coordinate){ result in
+            switch result {
+            case .Success(let currentWeather):
+                self.display(currentWeather)
+            case .Failure(let error as NSError):
+                self.showAlert("Unable to retrieve weather data", message: error.localizedDescription)
+            default: break
+            }
+        }
+    }
+    
+    
+   
 }
 

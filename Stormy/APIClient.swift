@@ -106,28 +106,3 @@ extension APIClient {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//let baseURL = NSURL(string: "https://api.forecast.io/forecast/\(forecastKeyAPI)/")
-//let forecastURL = NSURL(string: locationString, relativeToURL: baseURL)
-//
-//let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-//let session = NSURLSession(configuration: configuration)
-//let request = NSURLRequest(URL: forecastURL!)
-//let dataTask = session.dataTaskWithRequest(request) { data, response, error in
-//    
-//}
