@@ -45,6 +45,7 @@ extension APIClient {
     func JSONTaskWithRequest(request: NSURLRequest, completion: JSONCompletion) -> JSONTask {
         
         let task = session.dataTaskWithRequest(request){ data, response, error in
+            
             guard let HTTPResponse = response as? NSHTTPURLResponse else {
                     let userInfo = [
                         NSLocalizedDescriptionKey: NSLocalizedString("Missing HTTP Response", comment: "")
@@ -61,7 +62,7 @@ extension APIClient {
                 switch HTTPResponse.statusCode{
                 case 200:
                     do {
-                        let json = try NSJSONSerialization.dataWithJSONObject(data!, options: []) as? [String: AnyObject]
+                        let json = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as? [String: AnyObject]
                         completion(json, HTTPResponse, nil)
                     } catch let error as NSError {
                         completion(nil, HTTPResponse, error)
@@ -79,25 +80,26 @@ extension APIClient {
     
     func fetch<T>(request: NSURLRequest, parse: JSON -> T?, completion: APIResult<T> -> Void) {
         let task = JSONTaskWithRequest(request) { json, response, error in
-            guard let json = json else {
-                if let error = error {
-                    completion(.Failure(error))
-                } else {
+            dispatch_async(dispatch_get_main_queue()) {
+                guard let json = json else {
+                    if let error = error {
+                        completion(.Failure(error))
+                    } else {
                     // TODO: Implement error handling
+                    }
+                    return
                 }
-                return
-            }
             
-            if let value = parse(json) {
-                completion(.Success(value))
-            } else {
-                let error = NSError(domain: TRENetworkingErrorDomain, code: UnexpectedResponseError, userInfo: nil)
-                completion(.Failure(error))
-            }
+                if let value = parse(json) {
+                    completion(.Success(value))
+                } else {
+                    let error = NSError(domain: TRENetworkingErrorDomain, code: UnexpectedResponseError,    userInfo: nil)
+                    completion(.Failure(error))
+                }
             
+            }
+        
         }
-        
-        
         
         task.resume()
     }

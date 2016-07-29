@@ -47,14 +47,10 @@ class ViewController: UIViewController {
         forecastAPIClient.fetchCurrentWeather(coordinate){ result in
             switch result {
             case .Success(let currentWeather):
-                dispatch_async(dispatch_get_main_queue()) {
                     self.display(currentWeather)
-                }
             case .Failure(let error as NSError):
-                dispatch_async(dispatch_get_main_queue()) {
                     self.showAlert("Unable to retrieve weather data", message: error.localizedDescription)
-                }
-            default: break 
+            default: break
             }
         }
         
